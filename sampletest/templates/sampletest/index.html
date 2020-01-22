@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>paizasampletest</title>
+    <style>
+      body {
+        padding: 10px;
+        color:red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>hello django</h1>
+    <h2>hello sampletest</h2>
+    <p>{{message}}</p>
+    {% for player in players %}
+      <p>{{player}}はモンスターと戦った</p>
+    {% endfor %}
+    <!-- djangoのfor文の書き方は、{% for 変数　in リスト名 % }となる。 -->
+  </body>
+</html>
