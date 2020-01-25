@@ -19,5 +19,8 @@
     {% endfor %}
     <!-- djangoのfor文の書き方は、{% for 変数　in リスト名 % }となる。 -->
       <p>モンスターを倒した。</p>
+    {% for article in articles %}
+      <p>{{article.content}}</p>
+    {%endfor%}
   </body>
 </html>
