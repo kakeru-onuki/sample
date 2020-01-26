@@ -13,4 +13,8 @@ def index(request):
     # djangoでは、renderの第三引数にcontextを渡すと、テンプレート側で呼び出すことができる。
 def detail(request,id):
     article = get_object_or_404(Article,pk=id)
-    return HttpResponse(article)
+    context={
+    "message":"Show Article"+str(id),
+    "article":article,
+    }
+    return render(request,"sampletest/detail.html",context)

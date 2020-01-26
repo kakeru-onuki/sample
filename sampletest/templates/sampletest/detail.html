@@ -11,18 +11,15 @@
     </style>
   </head>
   <body>
-    <h1>hello django　HTML</h1>
-    <h2>hello sampletest　HTML</h2>
+    <h1>hello django</h1>
+    <h2>hello sampletest</h2>
     <p>{{message}}</p>
     {% for player in players %}
-      <p>{{player}}はモンスターと戦った　ここはfor文</p>
+      <p>{{player}}はモンスターと戦った</p>
     {% endfor %}
     <!-- djangoのfor文の書き方は、{% for 変数　in リスト名 % }となる。 -->
-      <p>モンスターを倒した。ただのhtml</p>
-    {% for article in articles %}
-      <p>{{article.content}},
-      　　<a href="{% url "sampletest:detail" article.id %}">Articleの中身の詳細　</a>
-      </p>
-    {%endfor%}
+      <p>モンスターを倒した。</p>
+    <p>{{article.content}}</p>
+    <p><a href= "{% url "sampletest:index" %}">一覧</p>
   </body>
 </html>
