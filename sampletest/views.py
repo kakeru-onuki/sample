@@ -18,3 +18,24 @@ def detail(request,id):
     "article":article,
     }
     return render(request,"sampletest/detail.html",context)
+
+def create(request):
+    article=Article(content="Hello sampletestooooo",user_name="PAIZADAZE☆")
+    article.save()
+    articles=Article.objects.all()
+    context={
+    "message":"Create article",
+    "articles": articles,
+}
+    return render(request,"sampletest/index.html",context)
+
+def delete(request,id):
+    article = get_object_or_404(Article,pk=id)
+    article.delete()
+
+    articles="Article.objects.all()"
+    context={
+    "message":"Delete Article"+str(id),
+    "article":article,
+    }
+    return render(request,"sampletest/detail.html",context)

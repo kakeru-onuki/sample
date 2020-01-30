@@ -20,9 +20,13 @@
     <!-- djangoのfor文の書き方は、{% for 変数　in リスト名 % }となる。 -->
       <p>モンスターを倒した。ただのhtml</p>
     {% for article in articles %}
-      <p>{{article.content}},
+      <p>{{article.content}},{{article.user_name}},
       　　<a href="{% url "sampletest:detail" article.id %}">Articleの中身の詳細　</a>
+          <a href="{% url "sampletest:delete" article.id　%}">削除</a>
       </p>
     {%endfor%}
+    <p>
+      <a href="{% url "sampletest:create" %}">新規</a>
+  </p>
   </body>
 </html>
