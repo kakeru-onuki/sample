@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html lang="ja" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>paizasampletest</title>
-    <style>
-      body {
-        padding: 10px;
-        color:red;
-      }
-    </style>
-  </head>
-  <body>
+{% extends "./base.html" %}
+{% block content %}
     <h1>hello django　HTML</h1>
     <h2>hello sampletest　HTML</h2>
     <p>{{message}}</p>
@@ -19,14 +8,21 @@
     {% endfor %}
     <!-- djangoのfor文の書き方は、{% for 変数　in リスト名 % }となる。 -->
       <p>モンスターを倒した。ただのhtml</p>
-    {% for article in articles %}
-      <p>{{article.content}},{{article.user_name}},
-      　　<a href="{% url "sampletest:detail" article.id %}">Articleの中身の詳細　</a>
-          <a href="{% url "sampletest:delete" article.id　%}">削除</a>
+    <table class="table table-striped table-hover">
+      {% for article in articles %}
+        <tr>
+          <td>{{article.content}}</td>
+          <td>{{article.user_name}}</td>
+          <td>
+            <a href="{% url "sampletest:detail" article.id %}" class="btn btn-outline-primary">Articleの中身の詳細　</a>
+            <a href="{% url "sampletest:delete" article.id　%}" class="btn btn-outline-secondary">削除</a>
+          </td>
+        </tr>
+      {%endfor%}
+    </table>
+      <p>
+        <a href="{% url "sampletest:create" %}" class="btn btn-outline-primary">新規</a>
       </p>
-    {%endfor%}
-    <p>
-      <a href="{% url "sampletest:create" %}">新規</a>
-  </p>
-  </body>
-</html>
+
+
+{% endblock %}
