@@ -1,12 +1,22 @@
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
 from .models import Article
+from .forms import SearchForm
+from .forms import ArticleForm
+
 def index(request):
     articles=Article.objects.all()
+    searchForm=SearchForm(request.GET)
+    if searchForm.is_valid():#もしserchFormに正しい値が入ったら
+        keyword=searchForm.cleaned_data["keyword"]#keyword1変数にforms.pyのkeywordを代入する。
+        articles=Article.objects.filter(content__contains=keyword)
+    else:
+        searchForm=SearchForm()
+        articles=Article.objects.all()
     context={
-    "message":"welcome my sampletest",
-    "players":["勇者","戦士","魔法使い"],
+    "message":"welcome my app",
     "articles": articles,
+    "searchForm":searchForm,
 }
     return render(request,"sampletest/index.html",context)
     # renderは、データとテンプレートを組み合わせて呼び返す、ショートカット関数
@@ -19,15 +29,48 @@ def detail(request,id):
     }
     return render(request,"sampletest/detail.html",context)
 
-def create(request):
-    article=Article(content="Hello sampletestooooo",user_name="PAIZADAZE☆")
-    article.save()
-    articles=Article.objects.all()
+def new(request):
+    articleForm=ArticleForm()
+
     context={
-    "message":"Create article",
-    "articles": articles,
+        "message":"New Article",
+        "articleForm":articleForm,
+    }
+    return render(request,"sampletest/new.html",context)
+
+def create(request):
+    if request.method=="POST":
+        articleForm=ArticleForm(request.POST)
+        if articleForm.is_valid():
+            article=articleForm.save()
+    context={
+    "message":"Create article"+str(article.id),
+    "article": article,
 }
-    return render(request,"sampletest/index.html",context)
+    return render(request,"sampletest/detail.html",context)
+
+def edit(request,id):
+    article = get_object_or_404(Article,pk=id)
+    articleForm=ArticleForm(instance=article)
+    context={
+    "message":"Edit Article"+str(id),
+    "article":article,
+    "articleForm":articleForm
+    }
+    return render(request,"sampletest/edit.html",context)
+
+def update(request,id):
+    if request.method == "POST":
+        article = get_object_or_404(Article,pk=id)
+        articleForm=ArticleForm(request.POST , instance=article)
+        if articleForm.is_valid():
+            articleForm.save()
+
+    context={
+    "message":"Edit Article"+str(id),
+    "article":article,
+    }
+    return render(request,"sampletest/detail.html",context)
 
 def delete(request,id):
     article = get_object_or_404(Article,pk=id)

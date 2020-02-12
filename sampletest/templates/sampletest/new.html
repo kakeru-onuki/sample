@@ -1,0 +1,13 @@
+{% extends "./base.html"%}
+{% load bootstrap4 %}
+
+{% block content %}
+  <h1>{{message}}</h1>
+
+  <form  action="{% url "sampletest:create" %}" method="post" class="form">
+    {% csrf_token%}
+    {% bootstrap_form articleForm layout="horizontal" %}
+    <button type="submit" class="btn btn-outline-primary">create</button>
+    <a href="{% url "sampletest:index" %}" class="btn btn-outline-secondary">back</a>
+  </form>
+{% endblock %}

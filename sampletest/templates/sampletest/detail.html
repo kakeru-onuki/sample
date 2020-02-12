@@ -1,13 +1,20 @@
 {% extends "./base.html" %}
 {% block content %}
-    <h1>hello django</h1>
-    <h2>hello sampletest</h2>
+    <h1>Display result</h1>
+    <h2>The contents are as follows</h2>
     <p>{{message}}</p>
-    {% for player in players %}
-      <p>{{player}}はモンスターと戦った</p>
-    {% endfor %}
     <!-- djangoのfor文の書き方は、{% for 変数　in リスト名 % }となる。 -->
-      <p>モンスターを倒した。</p>
-    <p>{{article.content}},{{article.user_name}}</p>
-    <p><a href= "{% url "sampletest:index" %}" class="btn btn-outline-primary">一覧</p>
+
+    <p style="padding: 0.5em 1em;
+    margin: 1em 0;
+    background: #f4f4f4;
+    border-left: solid 6px black;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.33);">{{article.content}}, {{article.user_name}}</p>
+
+
+    <div>
+      <a href= "{% url "sampletest:index" %}" class="btn btn-outline-primary">List</a>
+      <a href= "{% url "sampletest:edit" article.id %}" class="btn btn-outline-primary">Edit</a>
+      <a href= "{% url "sampletest:delete" article.id %}" class="btn btn-outline-danger">Delete</a>
+    </div>
 {% endblock %}
