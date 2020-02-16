@@ -1,6 +1,6 @@
 {% extends "./base.html" %}
 {% block content %}
-    <h1>Welcome. this app is "free" Bulletin board!　</h1>
+    <h1 style="border-top:solid 3px black; border-bottom : solid 3px black; width:50%">Welcome. this app is "free" Bulletin board!　</h1>
     <p class="">{{message}}</p>
     {% if searchForm %}
       <form action="{% url "sampletest:index" %}" method="get">
@@ -19,6 +19,7 @@
           <td>{{article.content}}</td>
           <td>{{article.user_name}}</td>
           <td>
+
             <a href="{% url "sampletest:detail" article.id %}" class="btn btn-primary">Detail</a>
           </td>
         </tr>
