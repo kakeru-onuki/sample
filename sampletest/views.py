@@ -3,6 +3,10 @@ from django.http import HttpResponse
 from .models import Article
 from .forms import SearchForm
 from .forms import ArticleForm
+# ------------------------------
+from django.shortcuts import render,redirect
+from .forms import DocumentForm
+from .models import Document
 
 def index(request):
     articles=Article.objects.all()
@@ -82,3 +86,19 @@ def delete(request,id):
     "article":article,
     }
     return render(request,"sampletest/detail.html",context)
+
+# -------------------
+def index1(request):
+    if request.method=="POST":
+        form=DocumentForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect("index1")
+    else:
+        form =DocumentForm()
+        obj=Document.objects.all()
+
+    return render(request,"sampletest/model_form_apload.html",{
+        "form":form,
+        "obj":obj
+    })

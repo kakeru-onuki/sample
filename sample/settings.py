@@ -133,3 +133,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS=(
     os.path.join(BASE_DIR,"static")
 ),
+
+
+# 画像ファイルの実装何かあったらこれ以降消せばおｋ
+TIME_ZONE="Asia/Tokyo"
+MEDIA_ROOT= os.path.join(BASE_DIR,"media")
+MEDIA_URL="/media/"
