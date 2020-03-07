@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import pymysql
 pymysql.install_as_MySQLdb()
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -139,3 +140,24 @@ STATICFILES_DIRS=(
 TIME_ZONE="Asia/Tokyo"
 MEDIA_ROOT= os.path.join(BASE_DIR,"media")
 MEDIA_URL="/media/"
+
+
+
+
+import dj_database_url
+DATABASES['default'] = dj_database_url.config()
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+ALLOWED_HOSTS = ['*']
+
+STATIC_ROOT = 'staticfiles'
+
+DEBUG = False
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+# Activate Django-Heroku.
+django_heroku.settings(locals())

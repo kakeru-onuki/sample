@@ -93,10 +93,10 @@ def index1(request):
         form=DocumentForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
-            return redirect("index1")
+            return redirect("apload")
     else:
-        form =DocumentForm()
-        obj=Document.objects.all()
+        form = DocumentForm()
+        obj = Document.objects.all()
 
     return render(request,"sampletest/model_form_apload.html",{
         "form":form,
