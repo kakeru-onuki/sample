@@ -1,3 +1,3 @@
-web: gunicorn sample.wsgi --log-file -
-web: gunicorn gettingstarted.wsgi
-web: python ./main.py $PORT
+web: gunicorn sample.wsgi:application --log-file - --log-level debug
+python manage.py collectstatic --noinput
+manage.py migrate
